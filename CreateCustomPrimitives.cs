@@ -145,15 +145,18 @@ public class CreateCustomPrimitives : EditorWindow
         int height = planeHeight * planeVertexDensity;
 
         Vector3[] vertices = new Vector3[(width + 1) * (height + 1)];
+        Vector2[] uvs = new Vector2[(width + 1) * (height + 1)];
 
         for (int i = 0, y = 0; y <= height; y++)
         {
             for (int x = 0; x <= width; i++, x++)
             {
                 vertices[i] = new Vector3(x / planeVertexDensity, 0, y / planeVertexDensity);
+                uvs[i] = new Vector2((float)x / (float)width, (float)y / (float)height);
             }
         }
         mesh.vertices = vertices;
+        mesh.uv = uvs;
 
         int[] triangles = new int[height * width * 6];
         for (int ti = 0, vi = 0, y = 0; y < height; y++, vi++)
